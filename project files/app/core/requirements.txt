@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+jinja2
+httpx
+python-dotenv
+transformers
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client
+pinecone-client
