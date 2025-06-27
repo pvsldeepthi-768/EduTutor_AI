@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Generated Quiz - EduTutor AI</title>
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding-top: 2rem;
+      min-height: 100vh;
+    }
+    .container {
+      background-color: #1c1c1c;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 800px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .question-block {
+      margin-bottom: 1.5rem;
+    }
+    .question-block p {
+      margin-bottom: 0.5rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      padding-left: 1rem;
+    }
+    input[type="radio"] {
+      margin-right: 0.5rem;
+    }
+    button {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 0.7rem 1.5rem;
+      background-color: #00bfff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #008fcc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Generated Quiz - {{ topic }} ({{ difficulty|capitalize }})</h2>
+    <form action="/student/submit_quiz" method="post">
+  {% for question in quiz %}
+  <div class="question-block">
+    <p><strong>Question {{ loop.index }}:</strong> {{ question.question }}</p>
+    {% for key, option in question.options.items() %}
+      <label>
+        <input type="radio" name="q{{ loop.index0 }}" value="{{ key }}" required>
+        {{ key }}. {{ option }}
+      </label>
+    {% endfor %}
+  </div>
+{% endfor %}
+
+  <input type="hidden" name="topic" value="{{ topic }}">
+  <input type="hidden" name="difficulty" value="{{ difficulty }}">
+  <button type="submit">Finish</button>
+</form>
+
+  </div>
+</body>
+</html>

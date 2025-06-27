@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Diagnostic Test</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #0d0d0d;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      background-color: #1c1c1c;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+    }
+    form {
+      text-align: left;
+    }
+    p {
+      margin: 0 0 0.5rem 0;
+    }
+    label {
+      cursor: pointer;
+      user-select: none;
+    }
+    input[type="radio"] {
+      margin-right: 0.5rem;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: #00bfff;
+      border: none;
+      border-radius: 6px;
+      color: black;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0099cc;
+    }
+  </style>
+
+</head>
+<body>
+  <h2>Diagnostic Submitted</h2>
+  <p>Your answer: {{ answer }}</p>
+</body>
+</html>

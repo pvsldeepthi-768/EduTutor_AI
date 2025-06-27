@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Dashboard - EduTutor AI</title>
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d0d0d;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding-top: 3rem;
+    }
+    .container {
+      background-color: #1c1c1c;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      max-width: 800px;
+      width: 100%;
+      color: white;
+    }
+    h2, h3 {
+      margin-top: 0;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 1.5rem;
+    }
+    ul li {
+      padding: 0.3rem 0;
+      border-bottom: 1px solid #333;
+    }
+    form {
+      margin-top: 1.5rem;
+      text-align: left;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    select, input[type="text"] {
+      width: 100%;
+      padding: 0.4rem;
+      border-radius: 6px;
+      border: none;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #00bfff;
+      border: none;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #008fcc;
+    }
+    a.logout-link {
+      display: block;
+      margin-top: 2rem;
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a.logout-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome, {{ user.name }}</h2>
+
+    <h3>Your Courses:</h3>
+    <ul>
+      {% for course in courses %}
+        <li>{{ course.name }}</li>
+      {% else %}
+        <li>No courses available.</li>
+      {% endfor %}
+    </ul>
+
+    <form action="/student/diagnostic_test" method="post">
+      <label for="subject">Select subject for Diagnostic Test:</label>
+      <select name="subject" id="subject" required>
+        {% for course in courses %}
+          <option value="{{ course.name }}">{{ course.name }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit">Start Diagnostic Test</button>
+    </form>
+
+    <form action="/student/generate_quiz" method="post">
+      <label for="topic">Enter topic for Quiz:</label>
+      <input type="text" name="topic" id="topic" placeholder="Enter topic" required>
+
+      <label for="difficulty">Difficulty:</label>
+      <select name="difficulty" id="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium" selected>Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+      <button type="submit">Generate Quiz</button>
+    </form>
+
+    <a href="/auth/logout" class="logout-link">Logout</a>
+  </div>
+</body>
+</html>

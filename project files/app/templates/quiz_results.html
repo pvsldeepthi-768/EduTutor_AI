@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz Results - EduTutor AI</title>
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding-top: 2rem;
+      min-height: 100vh;
+    }
+    .container {
+      background-color: #1c1c1c;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 800px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    .question-result {
+      margin-bottom: 2rem;
+    }
+    .correct {
+      color: #00ff88;
+    }
+    .incorrect {
+      color: #ff5050;
+    }
+    .explanation {
+      font-style: italic;
+      color: #bbbbbb;
+      margin-top: 0.3rem;
+    }
+    .score {
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .back-button {
+      display: block;
+      text-align: center;
+      margin-top: 2rem;
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .back-button:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Quiz Results - {{ topic }}</h2>
+    <div class="score">Score: {{ score }}/{{ total }}</div>
+
+    {% for q in quiz %}
+      <div class="question-result">
+        <p><strong>Question {{ loop.index }}:</strong> {{ q.question }}</p>
+        <p>
+          Your Answer: 
+          {% if q.selected == q.answer %}
+            <span class="correct">{{ q.selected }}. {{ q.options[q.selected] }}</span>
+          {% else %}
+            <span class="incorrect">{{ q.selected }}. {{ q.options[q.selected] }}</span>
+            <br>Correct Answer: <span class="correct">{{ q.answer }}. {{ q.options[q.answer] }}</span>
+          {% endif %}
+        </p>
+        {% if q.explanations[q.answer] %}
+          <p class="explanation">Explanation: {{ q.explanations[q.answer] }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    <a href="/student/dashboard" class="back-button">← Back to Dashboard</a>
+  </div>
+</body>
+</html>

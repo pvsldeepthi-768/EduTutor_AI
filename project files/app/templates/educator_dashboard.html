@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Educator Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #0d0d0d;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      background-color: #1c1c1c;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      max-width: 800px;
+      width: 100%;
+    }
+    ul {
+      text-align: left;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    a {
+      color: #00bfff;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 1.5rem;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Educator Dashboard</h2>
+
+    {% if students %}
+    <ul>
+      {% for student in students %}
+      <li>
+        <strong>{{ student.name }}</strong> - Last Quiz: {{ student.last_quiz_topic }} - Score: {{ student.last_score }}%
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No students found.</p>
+    {% endif %}
+
+    <a href="/auth/logout">Logout</a>
+  </div>
+</body>
+</html>

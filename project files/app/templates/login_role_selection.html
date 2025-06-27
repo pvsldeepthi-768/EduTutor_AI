@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Select Role - EduTutor AI</title>
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d0d0d;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background-color: #1c1c1c;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+    }
+    a {
+      color: #00bfff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    button {
+      background-color: #00bfff;
+      border: none;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      margin: 0.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #008fcc;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      text-align: left;
+      max-width: 400px;
+      margin: 1rem auto;
+    }
+    ul li {
+      padding: 0.3rem 0;
+      border-bottom: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome, {{ user_name }}</h2>
+    <p>Email: {{ user_email }}</p>
+    <h3>Synced Courses:</h3>
+    <ul>
+      {% for course in courses %}
+        <li>{{ course.name }}</li>
+      {% endfor %}
+    </ul>
+
+    <h3>Select your role:</h3>
+    <form action="/auth/set_role" method="post">
+      <input type="hidden" name="email" value="{{ user_email }}">
+      <button type="submit" name="role" value="student">🎓 I'm a Student</button>
+      <button type="submit" name="role" value="educator">👩‍🏫 I'm an Educator</button>
+    </form>
+  </div>
+</body>
+</html>
